@@ -1,2 +1,2 @@
 genome hg38
-trackDb https://raw.githubusercontent.com/jchellmuth/BCL6.track.hub/master/
+trackDb hg38/trackDb.txt
