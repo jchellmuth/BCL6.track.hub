@@ -1,0 +1,5 @@
+hub BCL6-LCR_pub-tracks
+shortLabel Hellmuth et al. BCL6-LCR CRISPR screen
+longLabel Hellmuth et al. BCL6-LCR CRISPR screen and key ChIP-seq public tracks
+genomesFile genomes.txt
+email jch2004@med.cornell.edu

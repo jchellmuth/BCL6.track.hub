@@ -1,0 +1,5 @@
+hub BCL6-LCR-hub_jchellmuth
+shortLabel Chu & Hellmuth et al.
+longLabel Chu & Hellmuth et al. Unique immune cell coactivators specify locus control region function and cell stage
+genomesFile genomes.txt
+email jch2004@med.cornell.edu

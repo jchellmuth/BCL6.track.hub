@@ -1,0 +1,8 @@
+# Note that the following files were renamed
+
+# CRISPRi files copied from ~/scratch/aws/CRISPRiscan/hg38/
+mv gs_mean_unique.bg.bw CRISPRi_gs_mean.bw
+mv sw_mean_noheader.bg.bw CRISPRi_sw.bw
+
+# CRISPRn files in the following local folder: 
+# ~/Sync/CRISPRscan_BCL6_analysis/181207_CRISPRn_LY7_hg38/off-target-filter_v2
