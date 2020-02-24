@@ -238,7 +238,7 @@ priority 54
 
 track LY7_OCT1.FE.bw
 bigDataUrl LY7_OCT1.FE.bw
-shortLabel LY7_OCT1.FE.bw
+shortLabel LY7 OCT1 ChIP-seq
 longLabel RoederLab OCI-LY7 OCT1 ChIP-seq MACS2-FE
 type bigWig
 color 0,0,0
@@ -252,7 +252,7 @@ priority 60
 
 track LY7_OCT2.FE.bw
 bigDataUrl LY7_OCT2.FE.bw
-shortLabel LY7_OCT2.FE.bw
+shortLabel LY7 OCT2 ChIP-seq
 longLabel RoederLab OCI-LY7 OCT2 ChIP-seq MACS2-FE
 type bigWig
 color 0,0,0
@@ -266,7 +266,7 @@ priority 61
 
 track LY7_OCAB.FE.bw
 bigDataUrl LY7_OCAB.FE.bw
-shortLabel LY7_OCAB.FE.bw
+shortLabel LY7 OCAB ChIP-seq
 longLabel RoederLab OCI-LY7 OCA-B ChIP-seq MACS2-FE
 type bigWig
 color 0,0,0
