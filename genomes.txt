@@ -1,2 +1,2 @@
 genome hg38
-trackDb https://s3.amazonaws.com/melnicklab/jch2004/BCL6-LCR-hub/hg38/trackDB.txt
+trackDb https://raw.githubusercontent.com/jchellmuth/BCL6.track.hub/master/
