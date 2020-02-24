@@ -1,28 +1,98 @@
 #####################################################################
-# 4C
+# CRISPR screen - bigBeds
 
-track GCB_BCL6prom_nearBait_norm_counts_no-overlap.bw
-bigDataUrl GCB_BCL6prom_nearBait_norm_counts_no-overlap.bw
-shortLabel GCB 4C BCL6 promoter
-longLabel MelnickLab GCB 4C BCL6 promoter R4Cker nearBait normcounts
+track refseq.BCL6.locus.selected.transcripts.bb
+bigDataUrl refseq.BCL6.locus.selected.transcripts.bb
+shortLabel RefSeq
+longLabel Relevant BCL6 locus transcripts from RefSeq (selected by expression or ChIP-seq marks in OCI-LY7)
+type bigBed 12 .
+visibility pack
+priority 1
+
+track hg38_library_gRNAs_cutPos.color
+bigDataUrl hg38_library_gRNAs_cutPos.bed.bb
+shortLabel gRNA binding sites (colored by strand)
+longLabel BCL6-LCR screen gRNA binding / cut sites colored by strand
+type bigBed 6 +
+colorByStrand 255,0,0 0,128,0
+visibility dense
+priority 2
+
+track hg38_target_regions.bed.bb
+bigDataUrl hg38_target_regions.bed.bb
+shortLabel targeted regions
+longLabel BCL6-LCR screen targeted regions
+type bigBed 4 .
+visibility hide
+priority 3
+
+track LCR.constituent.enhancers.and.TSS.2kb.rename.bb
+bigDataUrl LCR.constituent.enhancers.and.TSS.2kb.rename.bb
+shortLabel LCR constituent enhancers
+longLabel LCR constituent enhancers as defined by top 25% DNAse-seq peaks (Encode ENCFF328RHP)
+type bigBed 6 +
+color 0,0,0
+visibility hide
+priority 4
+
+track validation_regions_190127.bb
+bigDataUrl validation_regions_190127.bb
+shortLabel LCR validation regions
+longLabel LCR regions used in validation experiments by targeting individually with CRISPRi
+type bigBed 9 .
+visibility hide
+itemRgb on
+priority 5
+
+#######################################################################
+# CRISPR screen - bigwigs
+
+track CRISPRi_gs_mean.bw
+bigDataUrl CRISPRi_gs_mean.bw
+shortLabel CRISPRi growth score
+longLabel CRISPRi growth score (mean of 2 replicates)
 type bigWig
 color 0,0,0
 altColor 0,0,0
 visibility full
 alwaysZero on
 autoScale off
-negateValues off
-viewLimits 0:1280000
-smoothingWindow 8
+viewLimits -2.8:0.9
 windowingFunction mean
 maxHeightPixels 100:64:8
+priority 10
 
-track BCL6prom.anchor.pos.bb
-bigDataUrl BCL6prom.anchor.pos.bb
-shortLabel 4C BCL6 promoter anchor
-longLabel 4C BCL6 promoter anchor
-type bigBed 3 .
-visibility pack
+track CRISPRi_sw.bw
+bigDataUrl CRISPRi_sw.bw
+shortLabel CRISPRi sliding window
+longLabel CRISPRi sliding window of growth score mean
+type bigWig
+color 0,100,200
+altColor 0,100,200
+visibility full
+alwaysZero on
+autoScale off
+viewLimits -2.7:0.3
+windowingFunction mean
+maxHeightPixels 100:64:8
+priority 11
+
+#####################################################################
+# DNase-seq tracks
+
+track LY7_DNAse_r1_ENCFF506FHA
+bigDataUrl LY7_DNAse_r1_ENCFF506FHA.bw
+shortLabel LY7 DNAseq
+longLabel Encode OCI-LY7 DNAseq replicate1 ENCFF506FHA
+type bigWig
+color 0,0,0
+visibility full
+alwaysZero on
+autoScale off
+viewLimits 0:5
+windowingFunction mean
+maxHeightPixels 100:64:8
+priority 20
 
 #####################################################################
 # ChromRNA-seq tracks
@@ -41,6 +111,7 @@ negateValues off
 viewLimits 0:60
 windowingFunction mean
 maxHeightPixels 100:64:8
+priority 30
 
 track SG93.merged.bam.rev.bw
 bigDataUrl SG93.merged.bam.rev.bw
@@ -56,105 +127,114 @@ negateValues on
 viewLimits 0:-60
 windowingFunction mean
 maxHeightPixels 100:64:8
+priority 31
 
 
 #####################################################################
-# DNase-seq tracks
+# 4C
 
-track LY7_DNAse_r1_ENCFF506FHA.bigWig
-bigDataUrl LY7_DNAse_r1_ENCFF506FHA.bigWig
-shortLabel LY7 DNAseq
-longLabel Encode OCI-LY7 DNAseq replicate1 ENCFF506FHA
+track BCL6prom.anchor.pos.bb
+bigDataUrl BCL6prom.anchor.pos.bb
+shortLabel 4C BCL6 promoter anchor
+longLabel 4C BCL6 promoter anchor
+type bigBed 3 .
+visibility hide
+priority 40
+
+track GCB_BCL6prom_nearBait_norm_counts_no-overlap.bw
+bigDataUrl GCB_BCL6prom_nearBait_norm_counts_no-overlap.bw
+shortLabel 4C-seq
+longLabel 4C-seq anchored on BCL6 promoter performed in GCB (Buntig et al., Immunity, 2016; re-analysis with R4Cker/nearBait/normcounts)
 type bigWig
 color 0,0,0
+altColor 0,0,0
 visibility full
 alwaysZero on
 autoScale off
-viewLimits 0:5
+negateValues off
+viewLimits 0:1280000
+smoothingWindow 8
 windowingFunction mean
 maxHeightPixels 100:64:8
+priority 41
 
 
 #####################################################################
-# ChIP-seq tracks
+# Histone ChIP-seq tracks
 
-track LY7_PAX5_fc
-bigDataUrl LY7_PAX5_fc.bw
-shortLabel LY7_PAX5_fc
-longLabel LY7_PAX5_fc
+track NB_H3K27ac_T14-11
+bigDataUrl S0138VH1.ERX1007380.H3K27ac.bwa.GRCh38.20151029.bw
+shortLabel NB H3K27ac
+longLabel NB H3K27ac ChIP-seq (Blueprint T14-11 S0138VH1)
 type bigWig
-color 0,0,0
+color 152,78,163
 visibility full
 alwaysZero on
 autoScale off
-viewLimits 0:20
+viewLimits 0:33
 windowingFunction mean
 maxHeightPixels 100:64:8
+priority 50
 
-track LY7_PU1_fc
-bigDataUrl LY7_PU1_fc.bw
-shortLabel LY7_PU1_fc
-longLabel LY7_PU1_fc
+track GC_H3K27ac_T14-11
+bigDataUrl S013ARH1.ERX1007385.H3K27ac.bwa.GRCh38.20151029.bw
+shortLabel GC H3K27ac ChIP-seq
+longLabel GCB H3K27ac ChIP-seq (Blueprint T14-11 S013ARH1)
 type bigWig
-color 0,0,0
+color 255,127,0
 visibility full
 alwaysZero on
 autoScale off
-viewLimits 0:54
+viewLimits 0:33
 windowingFunction mean
 maxHeightPixels 100:64:8
+priority 51
 
-track LY7_CREBBP.FE.bw
-bigDataUrl LY7_CREBBP.FE.bw
-shortLabel LY7_CREBBP.FE.bw
-longLabel RoederLab OCI-LY7 EP300 ChIP-seq MACSS2-FE
+track LY7_H3K27ac_fc_ENCFF787GTX
+bigDataUrl LY7_H3K27ac_fc_ENCFF787GTX.bw
+shortLabel LY7 H3K27ac ChIP-seq
+longLabel Encode OCI-LY7 H3K27ac ChIP-seq ENCFF787GTX
 type bigWig
-color 0,0,0
+color 228,26,28
 visibility full
 alwaysZero on
 autoScale off
-viewLimits 0:45
+viewLimits 0:98
 windowingFunction mean
 maxHeightPixels 100:64:8
+priority 52
 
-track LY7_EP300.FE.bw
-bigDataUrl LY7_EP300.FE.bw
-shortLabel LY7_EP300.FE.bw
-longLabel RoederLab OCI-LY7 EP300 ChIP-seq MACSS2-FE
+track LY7_H3K4me1_fc_ENCFF583VZK
+bigDataUrl LY7_H3K4me1_fc_ENCFF583VZK.bw
+shortLabel LY7 H3K4me1 ChIP-seq
+longLabel Encode OCI-LY7 H3K4me1 ChIP-seq ENCFF583VZK
 type bigWig
-color 0,0,0
+color 218,112,214
 visibility full
 alwaysZero on
 autoScale off
-viewLimits 0:29
+viewLimits 0:26
 windowingFunction mean
 maxHeightPixels 100:64:8
+priority 53
 
-track LY7_MED1.FE.bw
-bigDataUrl LY7_MED1.FE.bw
-shortLabel LY7_MED1.FE.bw
-longLabel RoederLab OCI-LY7 MED1 ChIP-seq MACS2-FE
+track LY7_H3K4me3_fc_ENCFF852DRP
+bigDataUrl LY7_H3K4me3_fc_ENCFF852DRP.bw
+shortLabel LY7 H3K4me3 ChIP-seq
+longLabel Encode OCI-LY7 H3K4me3 ChIP-seq ENCFF852DRP
 type bigWig
-color 0,0,0
+color 77,175,74
 visibility full
 alwaysZero on
 autoScale off
-viewLimits 0:32
+viewLimits 0:63
 windowingFunction mean
 maxHeightPixels 100:64:8
+priority 54
 
-track LY7_OCAB.FE.bw
-bigDataUrl LY7_OCAB.FE.bw
-shortLabel LY7_OCAB.FE.bw
-longLabel RoederLab OCI-LY7 OCA-B ChIP-seq MACS2-FE
-type bigWig
-color 0,0,0
-visibility full
-alwaysZero on
-autoScale off
-viewLimits 0:22
-windowingFunction mean
-maxHeightPixels 100:64:8
+
+#####################################################################
+# TF ChIP-seq tracks
 
 track LY7_OCT1.FE.bw
 bigDataUrl LY7_OCT1.FE.bw
@@ -162,12 +242,13 @@ shortLabel LY7_OCT1.FE.bw
 longLabel RoederLab OCI-LY7 OCT1 ChIP-seq MACS2-FE
 type bigWig
 color 0,0,0
-visibility full
+visibility hide
 alwaysZero on
 autoScale off
 viewLimits 0:27
 windowingFunction mean
 maxHeightPixels 100:64:8
+priority 60
 
 track LY7_OCT2.FE.bw
 bigDataUrl LY7_OCT2.FE.bw
@@ -181,88 +262,25 @@ autoScale off
 viewLimits 0:30
 windowingFunction mean
 maxHeightPixels 100:64:8
+priority 61
 
-track NB_H3K27ac_T14-11
-bigDataUrl S0138VH1.ERX1007380.H3K27ac.bwa.GRCh38.20151029.bw
-shortLabel NB H3K27ac T14-11
-longLabel Blueprint NB H3K27ac ChIP-seq T14-11 S0138VH1
-type bigWig
-color 152,78,163
-visibility full
-alwaysZero on
-autoScale off
-viewLimits 0:33
-windowingFunction mean
-maxHeightPixels 100:64:8
-
-track GC_H3K27ac_T14-11
-bigDataUrl S013ARH1.ERX1007385.H3K27ac.bwa.GRCh38.20151029.bw
-shortLabel GC H3K27ac T14-11
-longLabel Blueprint GCB H3K27ac ChIP-seq T14-11 S013ARH1
-type bigWig
-color 255,127,0
-visibility full
-alwaysZero on
-autoScale off
-viewLimits 0:33
-windowingFunction mean
-maxHeightPixels 100:64:8
-
-track LY7_CTCF_fc_ENCFF455RLT
-bigDataUrl LY7_CTCF_fc_ENCFF455RLT.bw
-shortLabel LY7_CTCF_fc
-longLabel Encode OCI-LY7 CTCF ChIP-seq ENCFF455RLT
+track LY7_OCAB.FE.bw
+bigDataUrl LY7_OCAB.FE.bw
+shortLabel LY7_OCAB.FE.bw
+longLabel RoederLab OCI-LY7 OCA-B ChIP-seq MACS2-FE
 type bigWig
 color 0,0,0
 visibility full
 alwaysZero on
 autoScale off
-viewLimits 0:34
+viewLimits 0:22
 windowingFunction mean
 maxHeightPixels 100:64:8
-
-track LY7_H3K27ac_fc_ENCFF787GTX
-bigDataUrl LY7_H3K27ac_fc_ENCFF787GTX.bw
-shortLabel LY7_H3K27ac_fc
-longLabel Encode OCI-LY7 H3K27ac ChIP-seq ENCFF787GTX
-type bigWig
-color 228,26,28
-visibility full
-alwaysZero on
-autoScale off
-viewLimits 0:98
-windowingFunction mean
-maxHeightPixels 100:64:8
-
-track LY7_H3K4me1_fc_ENCFF583VZK
-bigDataUrl LY7_H3K4me1_fc_ENCFF583VZK.bw
-shortLabel LY7_H3K4me1_fc
-longLabel Encode OCI-LY7 H3K4me1 ChIP-seq ENCFF583VZK
-type bigWig
-color 218,112,214
-visibility full
-alwaysZero on
-autoScale off
-viewLimits 0:26
-windowingFunction mean
-maxHeightPixels 100:64:8
-
-track LY7_H3K4me3_fc_ENCFF852DRP
-bigDataUrl LY7_H3K4me3_fc_ENCFF852DRP.bw
-shortLabel LY7_H3K4me3_fc
-longLabel Encode OCI-LY7 H3K4me3 ChIP-seq ENCFF852DRP
-type bigWig
-color 77,175,74
-visibility full
-alwaysZero on
-autoScale off
-viewLimits 0:63
-windowingFunction mean
-maxHeightPixels 100:64:8
+priority 62
 
 track SU4_MEF2B_ab.FE.bw
 bigDataUrl SU4_MEF2B_ab.FE.bw
-shortLabel SU4 MEF2B abcam Ryan
+shortLabel SU4 MEF2B ChIP-seq
 longLabel Ryan et al. SU-DHL-4 MEF2B ChIP-seq MACS2-FE (abcam antibody)
 type bigWig
 color 0,0,0
@@ -272,97 +290,96 @@ autoScale off
 viewLimits 0:25
 windowingFunction mean
 maxHeightPixels 100:64:8
+priority 63
 
-#####################################################################
-# ChIP-seq bigBeds
-
-track LY7_H3K27ac.high.broadPeak.sorted.bed.bb
-bigDataUrl LY7_H3K27ac.high.broadPeak.sorted.bed.bb
-shortLabel LY7 H3K27ac peaks (high)
-longLabel LY7 H3K27ac broad peaks (high)
-type bigBed 6
-color 0,0,0
-visibility dense
-
-track LY7_H3K27ac.low.broadPeak.sorted.bed.bb
-bigDataUrl LY7_H3K27ac.low.broadPeak.sorted.bed.bb
-shortLabel LY7 H3K27ac peaks (low)
-longLabel LY7 H3K27ac broad peaks (low)
-type bigBed 6
-color 0,0,0
-visibility dense
-
-#####################################################################
-# CRISPR screen - bigBeds
-
-track hg38_library_gRNAs_cutPos.color
-bigDataUrl hg38_library_gRNAs_cutPos.bed.bb
-shortLabel gRNA binding sites (colored by strand)
-longLabel BCL6-LCR screen gRNA binding / cut sites colored by strand
-type bigBed 6 +
-colorByStrand 255,0,0 0,128,0
-visibility dense
-
-track hg38_target_regions.bed.bb
-bigDataUrl hg38_target_regions.bed.bb
-shortLabel targeted regions
-longLabel BCL6-LCR screen targeted regions
-type bigBed 4 .
-visibility dense
-
-track refseq.BCL6.locus.selected.transcripts.bb
-bigDataUrl refseq.BCL6.locus.selected.transcripts.bb
-shortLabel Refseq
-longLabel Selected BCL6 locus RefSeq transcripts (selected by expression in OCI-LY7)
-type bigBed 12 .
-visibility pack
-
-track LCR.constituent.enhancers.and.TSS.2kb.rename.bb
-bigDataUrl LCR.constituent.enhancers.and.TSS.2kb.rename.bb
-shortLabel LCR constituent enhancers
-longLabel LCR constituent enhancers (as defined by OCI-LY7 top 25% DNAse-seq peaks extended to 2kb)
-type bigBed 6 +
-color 0,0,0
-visibility dense
-
-track validation_regions_190127.bb
-bigDataUrl validation_regions_190127.bb
-shortLabel Validation regions
-longLabel Valdiation regions
-type bigBed 9 .
-visibility pack
-itemRgb on
-
-#######################################################################
-# CRISPR screen - bigwigs
-
-track CRISPRi_gs_mean.bw
-bigDataUrl CRISPRi_gs_mean.bw
-shortLabel CRISPRi growth score mean
-longLabel CRISPRi growth score mean (2 replicates)
+track LY7_PAX5_fc
+bigDataUrl LY7_PAX5_fc.bw
+shortLabel LY7 PAX5 ChIP-seq
+longLabel LY7_PAX5_fc
 type bigWig
 color 0,0,0
-altColor 0,0,0
 visibility full
 alwaysZero on
 autoScale off
-viewLimits -2.8:0.9
+viewLimits 0:20
 windowingFunction mean
 maxHeightPixels 100:64:8
+priority 64
 
-track CRISPRi_sw.bw
-bigDataUrl CRISPRi_sw.bw
-shortLabel CRISPRi sliding window
-longLabel CRISPRi sliding window of growth score mean
+track LY7_PU1_fc
+bigDataUrl LY7_PU1_fc.bw
+shortLabel LY7 PU1 ChIP-seq
+longLabel LY7_PU1_fc
 type bigWig
-color 0,100,200
-altColor 0,100,200
+color 0,0,0
 visibility full
 alwaysZero on
 autoScale off
-viewLimits -2.7:0.3
+viewLimits 0:54
 windowingFunction mean
 maxHeightPixels 100:64:8
+priority 65
+
+track LY7_CREBBP.FE.bw
+bigDataUrl LY7_CREBBP.FE.bw
+shortLabel LY7 CREBBP ChIP-seq
+longLabel RoederLab OCI-LY7 EP300 ChIP-seq MACSS2-FE
+type bigWig
+color 0,0,0
+visibility full
+alwaysZero on
+autoScale off
+viewLimits 0:45
+windowingFunction mean
+maxHeightPixels 100:64:8
+priority 66
+
+track LY7_EP300.FE.bw
+bigDataUrl LY7_EP300.FE.bw
+shortLabel LY7 EP300 ChIP-seq
+longLabel RoederLab OCI-LY7 EP300 ChIP-seq MACSS2-FE
+type bigWig
+color 0,0,0
+visibility full
+alwaysZero on
+autoScale off
+viewLimits 0:29
+windowingFunction mean
+maxHeightPixels 100:64:8
+priority 67
+
+track LY7_MED1.FE.bw
+bigDataUrl LY7_MED1.FE.bw
+shortLabel LY7 MED1 ChIP-seq
+longLabel RoederLab OCI-LY7 MED1 ChIP-seq MACS2-FE
+type bigWig
+color 0,0,0
+visibility full
+alwaysZero on
+autoScale off
+viewLimits 0:32
+windowingFunction mean
+maxHeightPixels 100:64:8
+priority 68
+
+track LY7_CTCF_fc_ENCFF455RLT
+bigDataUrl LY7_CTCF_fc_ENCFF455RLT.bw
+shortLabel LY7 CTCF ChIP-seq
+longLabel Encode OCI-LY7 CTCF ChIP-seq ENCFF455RLT
+type bigWig
+color 0,0,0
+visibility full
+alwaysZero on
+autoScale off
+viewLimits 0:34
+windowingFunction mean
+maxHeightPixels 100:64:8
+priority 69
+
+
+
+
+
 
 
 # medium orchid: 186,85,211
