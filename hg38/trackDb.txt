@@ -30,7 +30,7 @@ track LCR.constituent.enhancers.categorized.bb
 bigDataUrl LCR.constituent.enhancers.categorized.bb
 shortLabel LCR constituent enhancers
 longLabel LCR constituent enhancers as defined by top 25% DNAse-seq peaks (Encode ENCFF328RHP) and functionally categorized (CRISPRi)
-type bigBed 6 +
+type bigBed 9 .
 visibility hide
 priority 4
 
