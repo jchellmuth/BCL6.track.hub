@@ -32,6 +32,7 @@ shortLabel LCR constituent enhancers
 longLabel LCR constituent enhancers as defined by top 25% DNAse-seq peaks (Encode ENCFF328RHP) and functionally categorized (CRISPRi)
 type bigBed 9 .
 visibility hide
+itemRgb on
 priority 4
 
 track validation_regions_190127.bb
